@@ -17,9 +17,9 @@
     <meta name="keyword" content="">
     <link rel="shortcut icon" href="/favicon.ico">
 
-    <title>{{ if eq .URL "/" }}{{ .Site.Title }}{{ else if eq .URL "/post/" }}{{ if
+    <title>{{ if eq .Permalink "/" }}{{ .Site.Title }}{{ else if eq .Permalink "/post/" }}{{ if
         .Site.Params.strings.posts_list_header }}{{ .Site.Params.strings.posts_list_header }}{{ else }}All Entries{{ end
-        }} &middot; {{ .Site.Title }}{{ else if in .URL "/tags/" }}Tags &middot; {{ .Site.Title }}{{ else }}{{ .Title }}
+        }} &middot; {{ .Site.Title }}{{ else if in .Permalink "/tags/" }}Tags &middot; {{ .Site.Title }}{{ else }}{{ .Title }}
         &middot; {{ .Site.Title }}{{ end }}</title>
 
     <!-- selection of themed bootstrap css to load-->
@@ -44,7 +44,7 @@
     <script src="{{ $baseurl }}/js/bootstrap.min-3.3.5.js"></script>
 
     <!-- rss -->
-    <link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
+    <link href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
 </head>
 
 <body lang="{{ if .Site.Params.languageCode }}{{ .Site.Params.languageCode }}{{ else }}en{{ end }}">
